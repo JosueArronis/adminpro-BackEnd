@@ -1,0 +1,16 @@
+{
+    "name": "backendserver",
+    "version": "1.0.0",
+    "description": "Servidor Node Js Backend",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Josue Arronis",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.16.4",
+        "mongoose": "^5.4.1"
+    }
+}
