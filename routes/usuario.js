@@ -42,7 +42,7 @@ app.get('/', (req, res, next) => {
 // Actualizar Usuario
 //=======================================================
 
-app.put('/:id', mdAuth.verifyToken, (req, res) => {
+app.put('/:id', [mdAuth.verifyToken, mdAuth.verifyAdmin_o_Mismo], (req, res) => {
     var id = req.params.id;
     var body = req.body;
     Usuario.findById(id, (err, usuario) => {
@@ -115,7 +115,7 @@ app.post('/', (req, res) => {
 // Eliminar Usuario por el id
 //=======================================================
 
-app.delete('/:id', mdAuth.verifyToken, (req, res) => {
+app.delete('/:id', [mdAuth.verifyToken, mdAuth.verifyAdmin_Role], (req, res) => {
     var id = req.params.id;
 
     Usuario.findByIdAndDelete(id, (err, userDelete) => {

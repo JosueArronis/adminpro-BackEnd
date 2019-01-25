@@ -20,3 +20,38 @@ exports.verifyToken = function(req, res, next) {
         next();
     });
 };
+// ======================================
+//  Verificar Admin
+// ======================================
+exports.verifyAdmin_Role = function(req, res, next) {
+    var usuario = req.usuario;
+    if (usuario.role === 'ADMIN_ROLE') {
+        next();
+        return;
+    } else {
+        // No admin
+        return res.status(401).json({
+            ok: false,
+            mensaje: 'Token incorrecto',
+            errors: { message: 'Accion no permitida' }
+        });
+    }
+};
+// ======================================
+//  Verificar Admin o mismo usuario
+// ======================================
+exports.verifyAdmin_o_Mismo = function(req, res, next) {
+    var usuario = req.usuario;
+    var id = req.params.id;
+    if (usuario.role === 'ADMIN_ROLE' || usuario._id === id) {
+        next();
+        return;
+    } else {
+        // No admin or same User
+        return res.status(401).json({
+            ok: false,
+            mensaje: 'Token incorrecto',
+            errors: { message: 'Accion no permitida' }
+        });
+    }
+};
